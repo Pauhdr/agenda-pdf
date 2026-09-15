@@ -2,7 +2,7 @@
 
 **Crea tu agenda digital en PDF en un minuto.** Eliges cuándo empieza el año y la semana, y descargas un planificador con índice anual, meses y semanas enlazados entre sí, listo para usar en la tablet con GoodNotes, Notability o cualquier app de notas.
 
-### 👉 [Crear mi agenda](https://TU_USUARIO.github.io/agenda-pdf/)
+### 👉 [Crear mi agenda](https://pauhdr.github.io/agenda-pdf/)
 
 Gratis, sin registro y sin instalar nada.
 
