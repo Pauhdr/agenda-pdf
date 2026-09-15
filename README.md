@@ -1,95 +1,94 @@
-# Agenda PDF
+# agenda
 
-Generador de planificadores en PDF para tableta (GoodNotes, Notability, etc.) con:
+**Crea tu agenda digital en PDF en un minuto.** Eliges cuándo empieza el año y la semana, y descargas un planificador con índice anual, meses y semanas enlazados entre sí, listo para usar en la tablet con GoodNotes, Notability o cualquier app de notas.
 
-- **Índice anual** con los 12 meses en miniatura. Cada día enlaza a su semana.
-- **Página mensual** por mes. Cada día y cada número de semana enlazan a la página de esa semana, y hay flechas al mes anterior y siguiente.
-- **Página semanal** por semana, con navegación a la semana anterior y siguiente, al mes y al índice.
-- Marcadores (índice lateral del lector) con meses y semanas.
+### 👉 [Crear mi agenda](https://TU_USUARIO.github.io/agenda-pdf/)
 
-Opciones: mes y año de inicio, duración (3 a 24 meses), primer día de la semana, numeración de semanas (ISO o desde el inicio), idioma (español/inglés) y tema (oscuro/claro). La configuración queda en la URL, así que puedes compartir un enlace con tus opciones.
+Gratis, sin registro y sin instalar nada.
 
-Todo se genera en el navegador: no hay servidor, base de datos ni dependencias.
+![La web: opciones a la izquierda y vista previa de la agenda a la derecha](docs/img/web.png)
 
-## Probarlo en local
+---
 
-Necesitas [Node.js](https://nodejs.org) 22 o superior.
+## Qué incluye tu agenda
 
-```bash
-npm start          # abre http://localhost:5173
-npm test           # pruebas automáticas
-```
+![Índice anual, página mensual y página semanal](docs/img/paginas.png)
 
-También puedes generar una agenda desde la terminal:
+- **Índice del año.** Los 12 meses de un vistazo, en miniatura.
+- **Una página por mes.** Una cuadrícula con espacio para escribir en cada día y el número de semana a la izquierda de cada fila.
+- **Una página por semana.** Una casilla amplia para cada día, con hueco de sobra para tareas, citas o notas.
 
-```bash
-npm run generate -- --inicio 2026-09 --meses 12 --semana lunes --idioma es --tema oscuro --salida agenda.pdf
-npm run generate -- --ayuda
-```
+Todo está enlazado: tocas un día y vas a su semana, tocas el mes y vuelves atrás. No hace falta pasar páginas.
 
-## Publicarlo
+## Cómo crearla
 
-### Opción A: GitHub Pages (recomendada)
+**1. Elige las opciones**
 
-1. Crea un repositorio vacío en GitHub (por ejemplo `agenda-pdf`).
-2. Sube el código:
-   ```bash
-   git init -b main
-   git add .
-   git commit -m "Primera versión"
-   git remote add origin https://github.com/TU_USUARIO/agenda-pdf.git
-   git push -u origin main
-   ```
-3. En GitHub, ve a **Settings → Pages** y en **Source** elige **GitHub Actions**.
-4. En **Actions** verás el flujo "Pruebas y despliegue". Si falla la primera vez porque Pages aún no estaba activado, pulsa **Re-run jobs**.
-5. La web queda en `https://TU_USUARIO.github.io/agenda-pdf/`.
+| Opción | Para qué sirve |
+| --- | --- |
+| **Empieza en** | El mes y el año con que arranca la agenda. Puede ser enero, septiembre para el curso escolar o el mes que quieras. |
+| **Duración** | Cuántos meses incluye: 3, 6, 12, 18 o 24. |
+| **La semana empieza en** | El día que abre cada semana: lunes, domingo o cualquier otro. |
+| **Número de semana** | *Del año* usa la numeración oficial (la semana 1 es la primera semana de enero). *Desde el inicio de la agenda* cuenta 1, 2, 3… a partir de la primera semana. |
+| **Idioma del calendario** | Español o inglés, para los nombres de meses y días. |
+| **Tema** | Oscuro o claro. |
 
-Cada `git push` a `main` ejecuta las pruebas y, si pasan, vuelve a publicar. En los pull requests solo se ejecutan las pruebas. Cada ejecución deja una agenda de ejemplo descargable en la pestaña del flujo.
+![Tema oscuro con semanas de lunes, y tema claro en inglés con semanas de domingo](docs/img/opciones.png)
 
-Para usar tu propio dominio: **Settings → Pages → Custom domain**.
+**2. Revisa la vista previa**
 
-### Opción B: Netlify
+La vista previa muestra exactamente lo que vas a descargar. Puedes pasar páginas con las flechas, saltar a un mes con el desplegable o tocar la propia vista previa, porque los enlaces ya funcionan.
 
-1. Sube el código a GitHub (pasos 1 y 2 de arriba).
-2. En Netlify: **Add new site → Import an existing project → GitHub** y elige el repositorio.
-3. Netlify lee `netlify.toml` (ejecuta las pruebas, construye y publica `dist/`). No hay que configurar nada más.
+**3. Descarga el PDF**
 
-Usa solo una de las dos opciones. Si eliges Netlify, puedes borrar el job `deploy` de `.github/workflows/deploy.yml`.
+Pulsa **Descargar PDF**. La agenda se genera en tu propio dispositivo al momento.
 
-## Estructura
+**4. Ábrelo en tu app de notas**
 
-```
-index.html              página de la web
-src/
-  main.js               interfaz: formulario, vista previa y descarga
-  styles.css            estilos de la web
-  lib/
-    plan.js             qué páginas hay y cómo se enlazan
-    layout.js           diseño de cada página (índice, mes, semana)
-    pdf.js              escritor de PDF (fuentes, enlaces, marcadores)
-    canvas.js           mismo dibujo en <canvas> para la vista previa
-    font.js             lector de fuentes TrueType (métricas)
-    dates.js            fechas y número de semana ISO
-    i18n.js             textos por idioma y colores de los temas
-    options.js          valores por defecto, validación y URL
-fonts/                  fuentes incrustadas y sus licencias
-scripts/
-  serve.mjs             servidor local
-  build.mjs             copia la web a dist/
-  generate.mjs          genera PDFs desde la terminal
-  build-fonts.py        regenera las fuentes a partir de los originales
-test/                   pruebas (node --test)
-```
+Importa el PDF en GoodNotes, Notability, Noteshelf o la app que uses, normalmente con la opción *Importar* o *Abrir en…*, y empieza a escribir.
 
-## Cambios habituales
+> [!TIP]
+> En la mayoría de apps, los enlaces solo responden cuando no tienes seleccionado el lápiz. Cambia al modo de lectura o a la herramienta de mano para navegar, y vuelve al lápiz para escribir.
 
-- **Colores**: `THEMES` en `src/lib/i18n.js`. Puedes añadir un tema nuevo y luego la opción en `index.html` y `src/lib/options.js`.
-- **Otro idioma**: copia un bloque de `LANGS` en `src/lib/i18n.js` y añade la opción en `index.html` y `options.js`.
-- **Diseño de las páginas**: `src/lib/layout.js`. La página mide 600 × 800 puntos (3:4); todas las medidas están en ese sistema. La vista previa y el PDF usan el mismo código, así que lo que ves es lo que se descarga.
-- **Tipografías**: sustituye los archivos de `fonts/` por otras fuentes TrueType (`.ttf`) con los mismos nombres. `scripts/build-fonts.py` muestra cómo recortarlas.
+## Cómo moverte por la agenda
 
-Después de cualquier cambio, ejecuta `npm test`.
+![Zonas que puedes tocar en cada página](docs/img/navegacion.png)
 
-## Licencias
+| | Si tocas… | Vas a… |
+| --- | --- | --- |
+| **1** | el nombre de un mes en el índice | la página de ese mes |
+| **2** | un día del índice | la semana de ese día |
+| **3** | un día del mes, o el número de semana de la izquierda | esa semana |
+| **4** | las flechas ‹ › del mes | el mes anterior o el siguiente |
+| **5** | el nombre del mes o el año | el índice |
+| **6** | «SEMANA» y su número | el mes |
+| **7** | la barra inferior de la semana | la semana anterior o siguiente, otra semana del mes, el mes o el índice (botón «año») |
 
-El código se distribuye con licencia MIT (ver `LICENSE`). Las fuentes tienen sus propias licencias, incluidas en `fonts/`.
+El número de cada día en la página semanal también te lleva a su mes. Además, el PDF tiene marcadores: abre el índice lateral de tu lector y verás los meses y, dentro de cada uno, sus semanas.
+
+## Compartir tu configuración
+
+Las opciones que eliges quedan guardadas en la dirección de la página. Copia el enlace del navegador y quien lo abra verá la agenda con tu misma configuración. Es útil para compartir con tu clase, tu equipo o para volver a crear la del año siguiente.
+
+## Preguntas frecuentes
+
+**¿Se envían mis datos a algún sitio?**
+No. La agenda se crea en tu navegador y no pasa por ningún servidor.
+
+**¿Por qué algunas semanas tienen días de otro mes?**
+Las semanas no siempre empiezan el día 1. Cada semana aparece una sola vez, dentro del mes que tiene más días de esa semana. Cuando empieza un mes a mitad de semana, el día 1 lleva el nombre abreviado del mes para que se note el cambio.
+
+**¿Qué numeración de semanas elijo?**
+Si usas los números de semana en el trabajo o en el calendario de tu móvil, elige *Del año*. Si prefieres contar las semanas de un curso o un proyecto desde su inicio, elige *Desde el inicio de la agenda*.
+
+**¿Puedo imprimirla?**
+Sí. La página tiene formato 3:4 y se ajusta al papel al imprimir. Los enlaces, lógicamente, solo funcionan en la versión digital.
+
+**¿Cuántas agendas puedo crear?**
+Todas las que quieras, con las opciones que quieras.
+
+---
+
+¿Quieres saber cómo funciona por dentro o publicar tu propia copia? Consulta la [guía técnica](docs/DESARROLLO.md).
+
+Código con licencia [MIT](LICENSE). Las tipografías tienen sus propias licencias, incluidas en [`fonts/`](fonts/).
