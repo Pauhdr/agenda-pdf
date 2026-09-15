@@ -1,0 +1,17 @@
+{
+  "name": "agenda-pdf",
+  "version": "1.0.0",
+  "description": "Generador de planificadores en PDF con índice anual, meses y semanas enlazados.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test \"test/*.test.mjs\"",
+    "generate": "node scripts/generate.mjs"
+  },
+  "license": "MIT"
+}

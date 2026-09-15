@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda · Generador de planificadores en PDF</title>
+  <meta name="description" content="Genera un planificador en PDF con índice anual, meses y semanas enlazados. Elige cuándo empieza el año y la semana.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/agenda-script.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/agenda-sans.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="src/styles.css">
+  <script type="module" src="src/main.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>agenda</h1>
+      <p>Genera tu planificador en PDF con índice anual, meses y semanas enlazados entre sí.</p>
+    </header>
+
+    <div class="layout">
+      <form class="panel" id="options" aria-label="Opciones de la agenda" onsubmit="return false">
+        <div class="field">
+          <label for="month">Empieza en</label>
+          <div class="pair">
+            <select id="month" name="month" aria-label="Mes de inicio"></select>
+            <input id="year" name="year" type="number" min="1900" max="2200" step="1" inputmode="numeric" aria-label="Año de inicio">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="count">Duración</label>
+          <select id="count" name="count"></select>
+        </div>
+
+        <div class="field">
+          <label for="weekStart">La semana empieza en</label>
+          <select id="weekStart" name="weekStart">
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miércoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sábado</option>
+            <option value="0">Domingo</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="numbering">Número de semana</label>
+          <select id="numbering" name="numbering">
+            <option value="iso">Del año (ISO)</option>
+            <option value="agenda">Contando desde el inicio de la agenda</option>
+          </select>
+          <p class="hint" id="numbering-hint" hidden>Como la semana no empieza en lunes, cada una toma el número ISO de su día central.</p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Idioma del calendario</legend>
+          <div class="seg">
+            <label><input type="radio" name="lang" value="es"><span>Español</span></label>
+            <label><input type="radio" name="lang" value="en"><span>English</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Tema</legend>
+          <div class="seg">
+            <label><input type="radio" name="theme" value="dark"><span>Oscuro</span></label>
+            <label><input type="radio" name="theme" value="light"><span>Claro</span></label>
+          </div>
+        </fieldset>
+
+        <button type="button" id="download" class="primary" disabled>Descargar PDF</button>
+        <p class="summary" id="summary"></p>
+        <p class="msg" id="msg" role="status"></p>
+      </form>
+
+      <section class="preview" aria-label="Vista previa">
+        <div class="pv-bar">
+          <button type="button" id="prev" aria-label="Página anterior">‹</button>
+          <span class="pn" id="page-number"></span>
+          <button type="button" id="next" aria-label="Página siguiente">›</button>
+          <select id="jump" aria-label="Ir a"></select>
+        </div>
+        <canvas id="canvas" role="img" aria-label="Vista previa de la agenda"></canvas>
+        <p class="hint">Los enlaces de la vista previa funcionan igual que en el PDF: toca un día, una semana o las flechas.</p>
+      </section>
+    </div>
+
+    <footer>
+      <noscript>Esta herramienta necesita JavaScript para generar el PDF.</noscript>
+    </footer>
+  </div>
+</body>
+</html>

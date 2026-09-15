@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "AgendaScript";
+  src: url("../fonts/agenda-script.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "AgendaSans";
+  src: url("../fonts/agenda-sans.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --bg: #ecece8; --panel: #ffffff; --line: #d6d8d3; --ink: #1e2226; --muted: #6b7076;
+  --field: #f5f5f2; --btn: #1e2226; --btn-ink: #ffffff; --sel: #1e2226; --sel-ink: #ffffff;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000; --panel: #17191b; --line: #2b2f32; --ink: #e6e7e8; --muted: #8a8f94;
+    --field: #0f1011; --btn: #e6e7e8; --btn-ink: #000000; --sel: #3b4044; --sel-ink: #ffffff;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "AgendaSans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  padding: clamp(16px, 4vw, 48px);
+}
+button, select, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 18px 28px; margin-bottom: clamp(20px, 4vw, 36px); }
+h1 {
+  margin: 0;
+  font-family: "AgendaScript", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(4.2rem, 11vw, 7.5rem);
+  line-height: 0.8;
+}
+header p { margin: 0; color: var(--muted); max-width: 40ch; }
+
+.layout { display: grid; grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+@media (max-width: 820px) { .layout { grid-template-columns: 1fr; } }
+
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 18px; margin: 0; }
+.field { display: flex; flex-direction: column; gap: 6px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.field > label, .field legend { font-size: 13px; color: var(--muted); font-weight: 500; padding: 0; margin-bottom: 6px; }
+.pair { display: grid; grid-template-columns: 1fr 96px; gap: 8px; }
+select, input[type="number"] { width: 100%; background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; }
+select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 17px) 55%, calc(100% - 12px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}
+.hint { margin: 0; font-size: 12.5px; color: var(--muted); }
+.hint[hidden] { display: none; }
+
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+.seg label { position: relative; text-align: center; cursor: pointer; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span { display: block; padding: 7px 8px; border-radius: 7px; }
+.seg input:checked + span { background: var(--sel); color: var(--sel-ink); }
+.seg input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 1px; }
+
+.primary { background: var(--btn); color: var(--btn-ink); border: 0; border-radius: 12px; padding: 13px 16px; font-weight: 500; cursor: pointer; font-size: 16px; }
+.primary:hover { opacity: 0.9; }
+.primary:disabled { opacity: 0.55; cursor: progress; }
+.summary { margin: -6px 0 0; font-size: 13px; color: var(--muted); text-align: center; }
+.msg { margin: 0; font-size: 13px; text-align: center; }
+.msg:empty { display: none; }
+
+.preview { display: flex; flex-direction: column; gap: 12px; align-items: center; min-width: 0; }
+.pv-bar { display: flex; gap: 8px; align-items: center; width: 100%; max-width: 560px; }
+.pv-bar button { width: 38px; height: 38px; flex: none; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; font-size: 20px; line-height: 1; }
+.pv-bar button:disabled { opacity: 0.35; cursor: default; }
+.pn { font-size: 13px; color: var(--muted); white-space: nowrap; min-width: 8ch; text-align: center; font-variant-numeric: tabular-nums; }
+.pv-bar select { flex: 1; min-width: 0; }
+canvas { display: block; width: 100%; max-width: 560px; aspect-ratio: 3 / 4; height: auto; border-radius: 6px; border: 1px solid var(--line); background: #000; }
+.preview .hint { max-width: 560px; text-align: center; }
+footer { margin-top: 32px; }
